@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="" content="">
+<title></title>
+<style type="text/css" media="all">
+    body{
+        background-color: antiquewhite;
+    }
+    @media  screen and (min-width:550px){
+        body {
+            background-color: red;
+        }
+    }
+        
+    
+*{
+  margin: 0;
+  user-select: none;
+  padding: 0;
+}
+body{
+
+ background: #00ccff;
+ min-height: 100vh;
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ flex-direction: column;
+
+}
+ button{
+
+  height:2rem;
+  width: 4rem;
+  background: #222a2c;
+  color: white;
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+button:hover {
+background: white;
+  color: #222a2c;
+} 
+.start{
+position: relative;
+height: 14rem;
+width: 10rem;
+display: block;
+}
+    .respnse{
+     height: 10rem;
+     width: 100%;
+     background: black;
+     color: white;
+     display: grid;
+    place-items: center;
+    font-size: 3rem;
+    border-radius: 10px;
+}
+
+ .success{
+   animation: success 1s ease-in-out 2;
+ }
+@keyframes success{
+0%{
+  background: #00ccff;
+}
+30%{
+   background: #00ff47;
+}
+60%{
+ background:#ffa900;
+}
+90%{
+ background: #ff00de;
+}
+100%{
+ background: black;
+}
+}
+
+
+
+.score{
+  position: absolute;
+  width: 45%;
+  bottom: 0;
+  left: 0;
+  height: 3rem;
+  background:#c6ff00;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  color: #263032;
+}
+ .ball{
+   width: 45%;
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   height: 3rem;
+   background:#c6ff00;
+   border-radius: 5px;
+   display: grid;
+   place-items: center;
+   color: #263032;
+}
+
+.result{
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%,-50%);
+ height: 10rem;
+ width: 10rem;
+ background:white;
+ border-radius: 10px;
+ display: grid;
+ place-items: center;
+}
+
+
+.restart{
+  width:5rem;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <video autoplay loop muted src=" video.mp4"></video>
+  </div>
+<div class="start">
+
+<div class="respnse "></div>
+<div class="score">score: 0</div>
+<div class="ball">ball: 0</div>
+
+</div>
+
+<div class="result">
+    <span id="score"></span>
+    <span id="ball"></span>
+    <span id="response"></span>
+    <span id="strikeRate"></span>
+<button class="restart" onclick="restart()">Again Start</button>
+ </div>
+
+
+ <div class="userShoot">
+
+
+<button onclick="one(); achieve(1)">1</button>
+<button onclick="two(); achieve(2)">2</button>
+<button onclick="three(); achieve(3)">3</button>
+<button onclick="four(); achieve (4)">4</button>
+<button onclick="six(); achieve (6)">6</button>
+
+</div>
+
+
+
+ <script>
+
+let strikeRate=document.querySelector("#strikeRate")
+ let startDiv=document.querySelector('.start')
+  let userShoot=document.querySelector('.userShoot')
+   var score=0;
+   var ball=0;
+  let result=document.querySelector('.result')
+  result.style.display='none'
+let showScore=document.querySelector('.score');
+let response=document.querySelector('.resprise')
+let showBall=document.querySelector('.ball');
+
+
+function one(){
+
+ const x=1;
+ var y=Math.floor(Math.random()*7);
+
+//check out/not out
+if(x==y) {
+ ball++;
+strikeRate.innerHTML="strike Rate: "+((score/ball)*100).toFixed(2);
+  userShoot.style.display='none'
+  var out=Math.floor(Math.random()*2)
+  result.style.display='grid'
+  startDiv.style.display='none'
+
+if (out=='0') {
+     response.innerHTML='Run Out!!'
+  }else if(out=='1'){
+    response.innerHTML='Bowld Out!!'
+  }else{
+    response.innerHTML='Catch Out!!'
+}
+
+document.querySelector('#score').innerHTML='score: ${score}'
+document.querySelector('#response').innerHTML='wicked: ${respons .innerHTML}'
+document.querySelector('#ball').innerHTML='ball: ${ball}'
+   }
+
+
+//luck chance
+
+else if(y==0){
+  var z=Math.floor(Math.random()*3);
+  if(z==0){
+    score+=2;
+  response.innerHTML='NB+1'
+  showScore.innerHTML="score: "+score;
+
+}else if(z==1){
+  score+=1;
+response.innerHTML='WD'
+showScore.innerHTML="score: "+score;
+}else{
+
+ ball++;
+ userShoot.style.display='none'
+ var out=Math.floor(Math.random()*2)
+ result.style.display='grid'
+ startDiv.style.display='none'
+ strikeRate.innerHTML="strike Rate: "+((score/ball)*100).toFixed(2);
+   if (out='1'){
+    response.innerHTML='Bowld Out!!'
+  }else{
+    response.innerHTML='Catch Out!!'
+  }
+
+ document.querySelector('#score').innerHTML='score: ${score}'
+ document.querySelector('#response').innerHTML='wicked: ${response .innerHTML}'
+  document.querySelector('#ball').innerHTML='ball: ${ball}'
+
+     }
+
+}
+
+//real score
+else{
+  ball++
+  score+=1;
+  response.innerHTML='1'
+  showScore.innerHTML="score: "+score;
+}
+showBall.innerHTML='ball: '+ball;
+}
+
+function two(){
+
+ const x=2;
+ var y=Math.floor(Math.random()*7);
+
+//check out/not out
+if(x==y){
+  ball++;
+strikeRate.innerHTML="strike Rate: "+((score/ball)*100).toFixed(2);
+ userShoot.style.display='none'
+ var out=Math.floor(Math.random()*2)
+ result.style.display='grid'
+ startDiv.style.display='none'
+
+ if(out=='0'){
+   response.innerHTML='Run Out!!'
+ }else if(out=='1'){
+   response.innerHTML='Bowld Out!!'
+ }else{
+   response.innerHTML='Catch Out!!'
+ }
+
+document.querySelector('#score').innerHTML='score: ${score}'
+document.querySelector('#response').innerHTML='wicked: ${response.innerHTML}'
+document.querySelector('#ball').innerHTML='ball: ${ball}'
+
+
+   }
+
+//luck chance
+else if(y==0){
+  var z=Math.floor(Math.random()*3);
+  if(z==0){
+    score+=3;
+    response.innerHTML='NB+2'
+    showScore.innerHTML="score: "+score;
+
+}else if(z==1){
+  score+=2;
+  response.innerHTML='WD+1'
+  showScore.innerHTML="score: "+score;
+}else{
+
+ball++;
+userShoot.style.display='none'
+var out=Math.floor(Math.random()*2)
+result.style.display='grid'
+startDiv.style.display='none'
+strikeRate.innerHTML="strike Rate: "((score/ball)*100).toFixed(2);
+if(out=='1') {
+ response.innerHTML='Bowld Out!!'
+}else{
+ response.innerHTML='Catch Out!!'
+}
+
+document.querySelector('#score').innerHTML='score: ${score}'
+document.querySelector('#response').innerHTML='wicked: ${response .innerHTML}'
+document.querySelector('#ball').innerHTML='ball: ${ball}'
+ 
+  }
+
+}
+//real score
+else{
+  ball++
+  score+=2;
+  response.innerHTML='2'
+  showScore.innerHTML="score: "+score;
+}
+showBall.innerHTML='ball: '-ball;
+}
+
+function three(){
+
+const x=3;
+var y=Math.floor(Math.random()*7);
+
+//check out/not out
+  if(x==y){
+    ball++;
+strikeRate.innerHTML="strike Rate: "+((score/ball)*100).toFixed(2);
+    userShoot.style.display='none'
+    var out=Math.floor(Math.random()*2)
+    result.style.display='grid'
+    startDiv.style.display='none'
+
+if(out=='0') {
+  response.innerHTML='Run Out!!'
+}else if (out='1'){
+  response.innerHTML='Bowld Out!!'
+}else{
+  response.innerHTML='Catch Out!!'
+}
+
+document.querySelector('#score').innerHTML='score: ${score}'
+ document.querySelector('#response').innerHTML='wicked: ${response .innerHTML}'
+document.querySelector('#ball').innerHTML='ball: ${ball}'
+
+
+}
+
+//luck chance
+else if(y=0){
+var z=Math.floor(Math.random()*3);
+  if(z==0){
+    score+=4;
+    response.innerHTML='NB+3'
+    showScore.innerHTML="score: "+score;
+
+  }else if(z==1){
+    score+=3;
+    response.innerHTML='WD+2'
+    showScore.innerHTML="score: "+score;
+  }else{
+
+    ball++;
+    userShoot.style.display='none'
+    var out=Math.floor(Math.random()*2)
+    result.style.display='grid'
+    startDiv.style.display='none'
+strikeRate.innerHTML="strike Rate: "+((score/ball)*100).toFixed(2);
+if(out=='1'){
+  response.innerHTML='Bowld Out!!'
+}else{
+  response.innerHTML='Catch Out!!'
+}
+
+document.querySelector('#score').innerHTML='score: ${score}'
+document.querySelector('#response').innerHTML='wicked: ${response .innerHTML}'
+document.querySelector('#ball').innerHTML='ball: ${ball)'
+
+}
+
+}
+
+//real score
+else{
+  ball++
+   score+=3;
+   response.innerHTML='3'
+   showScore.innerHTML="score: "+score;
+}
+showBall.innerHTML='ball: '+ball;
+}
+
+function four(){
+
+  const x=4;
+var y=Math.floor(Math.random()*7);
+
+if(x==y) {
+
+  ball++;
+
+strikeRate.innerHTML="strike Rate: "+((score/ball)*100).toFixed(2);
+
+userShoot.style.display='none'
+
+var out=Math.floor(Math.random()*2)
+
+result.style.display='grid'
+
+startDiv.style.display='none'
+
+if(out=='1') {
+response.innerHTML='Bowld Out!!'
+}else{
+response.innerHTML='Catch Out!!'
+}
+document.querySelector('#score').innerHTML='score: ${score}'
+document.querySelector('#response').innerHTML='wicked: ${response.innerHTML}'
+
+document.querySelector('#ball').innerHTML='ball: ${ball}'
+}
+else if(y==0){
+var z=Math.floor(Math.random()*3);
+if(z==0){
+score+=5;
+response.innerHTML='NB+4'
+showScore.innerHTML="score: "+score;
+
+}else if(z==1){
+score+=1;
+responce.innerHTML='NB+4'
+showScore.innerHTML="score: "+score;
+}else{
+ball++;
+userShoot.style.display='none'
+var out=Math.floor(Math.random()*2)
+result.style.display='grid'
+startDiv.style.display='none'
+strikeRate.innerHTML="strike Rate: "+((score/ball)*100)
+if(out=='1'){
+response.innerHTML='Bowld Out!!'
+}else{
+response.innerHTML='Catch Out!!'
+}
+
+document.querySelector('#score').innerHTML='score: ${score}'
+document.querySelector('#response').innerHTML='wicked: ${response.innerHTML}'
+document.querySelector('#ball').innerHTML='ball: ${ball}'
+
+}
+
+}
+
+//real Score
+else{
+ball++
+score+=4;
+response.innerHTML='4'
+showScore.innerHTML="score: "+score;
+}
+showBall.innerHTML='ball: '+ball;
+ }
+
+function six(){
+
+    const x=6;
+var y=Math.floor(Math.random()*7)
+
+//check out/not out
+if(x
+...
+
+[Message clipped]  View entire message
